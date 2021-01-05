@@ -64,6 +64,48 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-字符串匹配" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2020/12/30/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/" class="article-date">
+  <time datetime="2020-12-30T11:32:05.000Z" itemprop="datePublished">2020-12-30</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2020/12/30/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/">字符串匹配</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="BF——暴力破解"><a href="#BF——暴力破解" class="headerlink" title="BF——暴力破解"></a>BF——暴力破解</h2><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 暴力破解法</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">findPosByBF</span><span class="params">(<span class="built_in">string</span> s, <span class="built_in">string</span> T)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// s为主串，T为被查找的串</span></span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">while</span>(i &lt;= s.length() &amp;&amp; j &lt;= T.length())&#123;</span><br><span class="line">		<span class="keyword">if</span> ( s[i<span class="number">-1</span>] == T[j<span class="number">-1</span>] ) &#123;</span><br><span class="line">			i++;</span><br><span class="line">			j++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			i = i - j + <span class="number">2</span>;</span><br><span class="line">			j = <span class="number">1</span>;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> ( j &gt; T.length() ) &#123;</span><br><span class="line">		<span class="keyword">return</span> i - T.length();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;<span class="comment">// 表示没找到</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="built_in">string</span> s = <span class="string">&quot;strig&quot;</span>;</span><br><span class="line">	<span class="built_in">string</span> T = <span class="string">&quot;ing&quot;</span>;</span><br><span class="line">	<span class="keyword">int</span> pos = findPosByBF(s, T);</span><br><span class="line">	<span class="built_in">cout</span> &lt;&lt; pos &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	</span><br><span class="line"></span><br><span class="line">	system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="2-KMP算法"><a href="#2-KMP算法" class="headerlink" title="2.KMP算法"></a>2.KMP算法</h2><pre><code>原理可以查看这两个视频
+https://www.bilibili.com/video/BV1Px411z7Yo/?spm_id_from=333.788.videocard.0
+https://www.bilibili.com/video/BV1hW411a7ys/?spm_id_from=333.788.videocard.0</code></pre>
+<figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span><span class="meta-string">&lt;string&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> <span class="built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 求前缀表prefix</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">getPrefixTable</span><span class="params">(<span class="built_in">string</span> s, <span class="keyword">int</span> prefix[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// s是待匹配的字符串</span></span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">1</span>;</span><br><span class="line">	<span class="keyword">int</span> len = <span class="number">0</span>;</span><br><span class="line">	prefix[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">while</span> ( i &lt; n ) &#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> ( s[i] == s[len] ) &#123;</span><br><span class="line">			len++;</span><br><span class="line">			prefix[i] = len;</span><br><span class="line">			i++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span>&#123;</span><br><span class="line">			<span class="comment">// 防止出界</span></span><br><span class="line">			<span class="keyword">if</span> ( len &gt; <span class="number">0</span> ) &#123;</span><br><span class="line">				len = prefix[len - <span class="number">1</span>];</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="keyword">else</span> &#123;</span><br><span class="line">				prefix[i] = len;</span><br><span class="line">				i++;</span><br><span class="line">			&#125;</span><br><span class="line">			</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 将前缀表移位，也就是将prefix[0] = -1;之后的往后移动</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">movePrefix</span><span class="params">(<span class="keyword">int</span> prefix[], <span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> i = n - <span class="number">1</span>; i &gt; <span class="number">0</span>; i--) &#123;</span><br><span class="line">		prefix[i] = prefix[i - <span class="number">1</span>];</span><br><span class="line">	&#125;</span><br><span class="line">	prefix[<span class="number">0</span>] = <span class="number">-1</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// KMP算法实现</span></span><br><span class="line"><span class="comment">// 此处求解出来的位置都是按照0开始数的</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">kmpSearch</span><span class="params">(<span class="built_in">string</span> text, <span class="built_in">string</span> pattern)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> m = text.length();</span><br><span class="line">	<span class="keyword">int</span> n = pattern.length();</span><br><span class="line">	<span class="keyword">int</span> j = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line">	<span class="keyword">int</span> *prefix = <span class="keyword">new</span> <span class="keyword">int</span>[n];</span><br><span class="line">	</span><br><span class="line">	getPrefixTable(pattern, prefix, n);</span><br><span class="line">	movePrefix(prefix, n);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">for</span> (<span class="keyword">int</span> k = <span class="number">0</span>; k &lt; n; k++) &#123;</span><br><span class="line">		<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;prefix is    &quot;</span> &lt;&lt; prefix[k] &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	<span class="keyword">while</span> (i &lt; m) &#123;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> ( j == n<span class="number">-1</span> ) &#123;</span><br><span class="line">			<span class="built_in">cout</span> &lt;&lt; <span class="string">&quot;found the pos is  &quot;</span> &lt;&lt; i - j &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">			j = prefix[j];</span><br><span class="line">		&#125;</span><br><span class="line"></span><br><span class="line">		<span class="keyword">if</span> ( text[i] == pattern[j] ) &#123;</span><br><span class="line">			i++;</span><br><span class="line">			j++;</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">else</span> &#123;</span><br><span class="line">			j = prefix[j];</span><br><span class="line">			<span class="keyword">if</span> ( j == <span class="number">-1</span> ) &#123;</span><br><span class="line">				i++;</span><br><span class="line">				j++;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	</span><br><span class="line">	<span class="built_in">string</span> text = <span class="string">&quot;ABABABCABAABABABCABAA&quot;</span>;</span><br><span class="line">	<span class="built_in">string</span> pattern = <span class="string">&quot;ABABCABAA&quot;</span>;</span><br><span class="line">	kmpSearch(text, pattern);</span><br><span class="line">	</span><br><span class="line">	system(<span class="string">&quot;pause&quot;</span>);</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2020/12/30/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/" data-id="ckjbcht4f0000nku83n353bwn" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-栈和队列" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2020/12/29/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" class="article-date">
@@ -120,7 +162,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/12/29/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" data-id="ckja0evdz000104u8cl43aars" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/12/29/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/" data-id="ckjbcht4s0002nku86798dhk3" class="article-share-link">Share</a>
       
       
     </footer>
@@ -177,7 +219,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/12/28/%E9%93%BE%E8%A1%A8/" data-id="ckja0eve1000204u8cywshgfm" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/12/28/%E9%93%BE%E8%A1%A8/" data-id="ckjbcht4u0003nku83j782k29" class="article-share-link">Share</a>
       
       
     </footer>
@@ -226,7 +268,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://example.com/2020/11/25/hello-world/" data-id="ckja0evdr000004u82a65dyw2" class="article-share-link">Share</a>
+      <a data-url="http://example.com/2020/11/25/hello-world/" data-id="ckjbcht4p0001nku81xq211ru" class="article-share-link">Share</a>
       
       
     </footer>
@@ -265,6 +307,10 @@
     <h3 class="widget-title">Recent Posts</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/2020/12/30/%E5%AD%97%E7%AC%A6%E4%B8%B2%E5%8C%B9%E9%85%8D/">字符串匹配</a>
+          </li>
         
           <li>
             <a href="/2020/12/29/%E6%A0%88%E5%92%8C%E9%98%9F%E5%88%97/">栈和队列</a>
