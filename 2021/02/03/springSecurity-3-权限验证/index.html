@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>springSecurity-3.权限验证 | Hexo</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="spring-security权限验证在前面的blog里面的springSecurity配置的配置类springSecurityConfig中加入了对于某些资源访问需要认证 如果认证成功（也就是登录之后携带token）之后，对于不同的role具有不同的权限则可以这样进行配置 1. 开始注解配置模式12&#x2F;&#x2F; 在springSecurityConfig上面加上这个注解@EnableGlobalMeth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="springSecurity-3.权限验证">
+<meta property="og:url" content="http://example.com/2021/02/03/springSecurity-3-%E6%9D%83%E9%99%90%E9%AA%8C%E8%AF%81/index.html">
+<meta property="og:site_name" content="Hexo">
+<meta property="og:description" content="spring-security权限验证在前面的blog里面的springSecurity配置的配置类springSecurityConfig中加入了对于某些资源访问需要认证 如果认证成功（也就是登录之后携带token）之后，对于不同的role具有不同的权限则可以这样进行配置 1. 开始注解配置模式12&#x2F;&#x2F; 在springSecurityConfig上面加上这个注解@EnableGlobalMeth">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2021-02-03T07:54:12.000Z">
+<meta property="article:modified_time" content="2021-02-03T07:55:52.453Z">
+<meta property="article:author" content="John Doe">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/atom.xml" title="Hexo" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  
+<link rel="stylesheet" href="/css/style.css">
+
+<meta name="generator" content="Hexo 5.2.0"></head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">Hexo</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://example.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-springSecurity-3-权限验证" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2021/02/03/springSecurity-3-%E6%9D%83%E9%99%90%E9%AA%8C%E8%AF%81/" class="article-date">
+  <time datetime="2021-02-03T07:54:12.000Z" itemprop="datePublished">2021-02-03</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      springSecurity-3.权限验证
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="spring-security权限验证"><a href="#spring-security权限验证" class="headerlink" title="spring-security权限验证"></a>spring-security权限验证</h2><pre><code>在前面的blog里面的springSecurity配置的配置类springSecurityConfig中加入了对于某些资源访问需要认证
+如果认证成功（也就是登录之后携带token）之后，对于不同的role具有不同的权限则可以这样进行配置</code></pre>
+<h2 id="1-开始注解配置模式"><a href="#1-开始注解配置模式" class="headerlink" title="1. 开始注解配置模式"></a>1. 开始注解配置模式</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 在springSecurityConfig上面加上这个注解</span></span><br><span class="line"><span class="meta">@EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-在使用的方法上使用不同的方式进行注解"><a href="#2-在使用的方法上使用不同的方式进行注解" class="headerlink" title="2. 在使用的方法上使用不同的方式进行注解"></a>2. 在使用的方法上使用不同的方式进行注解</h2><pre><code>1. 针对于prePostEnabled这种权限验证可以参考这篇blog的用法
+    https://blog.csdn.net/chihaihai/article/details/104678864
+2. 我针对于prePostEnabled = true做一些补充说明</code></pre>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 这是某个controller中对于@PreAuthorize注解的使用，也是基本的操作</span></span><br><span class="line"><span class="meta">@GetMapping(&quot;/test2&quot;)</span></span><br><span class="line">   <span class="meta">@PreAuthorize(&quot;hasAuthority(&#x27;ROLE_USER&#x27;)&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> ResponseEntity&lt;Object&gt; <span class="title">showTest1</span><span class="params">(<span class="meta">@RequestParam(&quot;id&quot;)</span> Integer id)</span></span>&#123;</span><br><span class="line">       Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">       map.put(<span class="string">&quot;hello&quot;</span>, id);</span><br><span class="line">       <span class="keyword">return</span> ResponseEntity.ok(map);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="meta">@GetMapping(&quot;/test3&quot;)</span></span><br><span class="line">   <span class="meta">@PreAuthorize(&quot;hasAuthority(&#x27;ROLE_ADMIN&#x27;)&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> ResponseEntity&lt;Object&gt; <span class="title">showTest2</span><span class="params">()</span></span>&#123;</span><br><span class="line">       Map&lt;String, Object&gt; map = <span class="keyword">new</span> HashMap&lt;String, Object&gt;();</span><br><span class="line">       map.put(<span class="string">&quot;hello&quot;</span>, <span class="string">&quot;java&quot;</span>);</span><br><span class="line">       <span class="keyword">return</span> ResponseEntity.ok(map);</span><br><span class="line">   &#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-1-上述方法的验证有一个问题就是在于权限Collection-lt-extends-GrantedAuthority-gt-authorities-这个集合你是否传进去了。"><a href="#2-1-上述方法的验证有一个问题就是在于权限Collection-lt-extends-GrantedAuthority-gt-authorities-这个集合你是否传进去了。" class="headerlink" title="2.1 上述方法的验证有一个问题就是在于权限Collection&lt;? extends GrantedAuthority&gt; authorities 这个集合你是否传进去了。"></a>2.1 上述方法的验证有一个问题就是在于权限Collection&lt;? extends GrantedAuthority&gt; authorities 这个集合你是否传进去了。</h3><p>对于我上篇blog 中的TokenProvide中的Authentication getAuthentication(String token) 方法中你需要明确的将用户的权限传进去。然后封装到Authentication对象中， 然后才可以进行权限验证。我想到的一个方法就是在 jwt构建的时候将权限信息传进去， 然后通过jwt取数据的时候取出来。见代码</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">createToken</span><span class="params">(Authentication authentication)</span> </span>&#123;</span><br><span class="line">    <span class="comment">// 将权限放在claims中</span></span><br><span class="line">    Map&lt;String, Set&lt;GrantedAuthority&gt;&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    map.put(AUTHORITIES_KEY, <span class="keyword">new</span> HashSet&lt;&gt;(authentication.getAuthorities()));</span><br><span class="line">    <span class="keyword">return</span> jwtBuilder</span><br><span class="line">            <span class="comment">// 加入ID确保生成的 Token 都不一致</span></span><br><span class="line">            .setId(UUID.randomUUID().toString())</span><br><span class="line">            .setClaims(map)</span><br><span class="line">            .setSubject(authentication.getName())</span><br><span class="line">            .compact();</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 依据Token 获取鉴权信息</span></span><br><span class="line"><span class="comment"> * Claims是map集合的一个子类接口</span></span><br><span class="line"><span class="comment"> * 这里通过token获取的authentication需要有一个权限，要不然之后没法进行权限验证</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@param</span> token /</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@return</span> /</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="function">Authentication <span class="title">getAuthentication</span><span class="params">(String token)</span> </span>&#123;</span><br><span class="line">	<span class="comment">// Claims是Map的一个实现类</span></span><br><span class="line">    Claims claims = getClaims(token);</span><br><span class="line">    <span class="comment">// 通过我上面createToken(Authentication authentication)产生token的时候将权限以map的形式放进去了，这时候就需要取出来。</span></span><br><span class="line">    <span class="comment">// 但是取得方式很奇怪，这是我从debug里面试验，然后取出来的方式。我会思考一下其他的方式的（推荐使用第二种方式（自定义验证的方法））</span></span><br><span class="line">    List&lt;? extends Map&gt; roles = (ArrayList&lt;? extends Map&gt;)claims.get(AUTHORITIES_KEY);</span><br><span class="line">    List&lt;GrantedAuthority&gt; list = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Object role : roles) &#123;</span><br><span class="line">        <span class="keyword">if</span>(role <span class="keyword">instanceof</span> Map)&#123;</span><br><span class="line">            list.add(<span class="keyword">new</span> SimpleGrantedAuthority(((Map&lt;String, String&gt;) role).get(<span class="string">&quot;authority&quot;</span>)));</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    User principal = <span class="keyword">new</span> User(claims.getSubject(), <span class="string">&quot;******&quot;</span>, <span class="keyword">new</span> ArrayList&lt;&gt;());</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> UsernamePasswordAuthenticationToken(principal, token, list);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-2-权限验证hasRole-String-s-的验证步骤-看源码"><a href="#2-2-权限验证hasRole-String-s-的验证步骤-看源码" class="headerlink" title="2.2 权限验证hasRole(String s)的验证步骤,看源码"></a>2.2 权限验证hasRole(String s)的验证步骤,看源码</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">hasRole</span><span class="params">(String role)</span> </span>&#123;</span><br><span class="line">   	<span class="keyword">return</span> <span class="keyword">this</span>.hasAnyRole(role);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">final</span> <span class="keyword">boolean</span> <span class="title">hasAnyRole</span><span class="params">(String... roles)</span> </span>&#123;</span><br><span class="line">   	<span class="comment">// this.defaultRolePrefix = &quot;ROLE_&quot;就是一个角色的前缀</span></span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.hasAnyAuthorityName(<span class="keyword">this</span>.defaultRolePrefix, roles);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line">   <span class="comment">// 这段code的含义就是查看roleSet里面是否存在你验证的权限+前缀prefix（如果你的角色里面有ROLE_,系统就不会给你自动加上ROLE_）。</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> <span class="keyword">boolean</span> <span class="title">hasAnyAuthorityName</span><span class="params">(String prefix, String... roles)</span> </span>&#123;</span><br><span class="line">   	<span class="comment">// roleSet是从Authentication中取出来的权限集合</span></span><br><span class="line">       Set&lt;String&gt; roleSet = <span class="keyword">this</span>.getAuthoritySet();</span><br><span class="line">       String[] var4 = roles;</span><br><span class="line">       <span class="keyword">int</span> var5 = roles.length;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">for</span>(<span class="keyword">int</span> var6 = <span class="number">0</span>; var6 &lt; var5; ++var6) &#123;</span><br><span class="line">           String role = var4[var6];</span><br><span class="line">           String defaultedRole = getRoleWithDefaultPrefix(prefix, role);</span><br><span class="line">           <span class="keyword">if</span> (roleSet.contains(defaultedRole)) &#123;</span><br><span class="line">               <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">           &#125;</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// this.getAuthoritySet();</span></span><br><span class="line"><span class="comment">// 而这个里面的authentication就是每次TokenFilter验证之后存储在SecurityContext中的authentication</span></span><br><span class="line"><span class="comment">// 所以需要我上述说的提取出权限。</span></span><br><span class="line">   <span class="function"><span class="keyword">private</span> Set&lt;String&gt; <span class="title">getAuthoritySet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">       <span class="keyword">if</span> (<span class="keyword">this</span>.roles == <span class="keyword">null</span>) &#123;</span><br><span class="line">       	<span class="comment">// 获取权限</span></span><br><span class="line">           Collection&lt;? extends GrantedAuthority&gt; userAuthorities = <span class="keyword">this</span>.authentication.getAuthorities();</span><br><span class="line">           <span class="keyword">if</span> (<span class="keyword">this</span>.roleHierarchy != <span class="keyword">null</span>) &#123;</span><br><span class="line">               userAuthorities = <span class="keyword">this</span>.roleHierarchy.getReachableGrantedAuthorities(userAuthorities);</span><br><span class="line">           &#125;</span><br><span class="line"></span><br><span class="line">           <span class="keyword">this</span>.roles = AuthorityUtils.authorityListToSet(userAuthorities);</span><br><span class="line">       &#125;</span><br><span class="line"></span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">this</span>.roles;</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+
+<h2 id="3-也可以自定义你的验证eg"><a href="#3-也可以自定义你的验证eg" class="headerlink" title="3. 也可以自定义你的验证eg:"></a>3. 也可以自定义你的验证eg:</h2><p><a target="_blank" rel="noopener" href="https://el-admin.vip/guide/ksks.html#%E5%BC%80%E5%8F%91%E5%87%86%E5%A4%87">https://el-admin.vip/guide/ksks.html#%E5%BC%80%E5%8F%91%E5%87%86%E5%A4%87</a>  该项目中对于权限验证的写法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@GetMapping</span></span><br><span class="line">   <span class="meta">@PreAuthorize(&quot;@el.check()&quot;)</span></span><br><span class="line">   <span class="function"><span class="keyword">public</span> ResponseEntity&lt;Object&gt; <span class="title">query</span><span class="params">(String filter, Pageable pageable)</span></span>&#123;</span><br><span class="line">       <span class="keyword">return</span> <span class="keyword">new</span> ResponseEntity&lt;&gt;(onlineUserService.getAll(filter, pageable),HttpStatus.OK);</span><br><span class="line">   &#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 权限验证的实体类</span></span><br><span class="line"><span class="comment">// 这个方法的作用在于查找出目前的登录用户的权限，然后和你给定的权限进行比对，如果存在任意一个对比成功就表明有权限</span></span><br><span class="line"><span class="meta">@Service(value = &quot;el&quot;)</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ElPermissionConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Boolean <span class="title">check</span><span class="params">(String ...permissions)</span></span>&#123;</span><br><span class="line">        <span class="comment">// 获取当前用户的所有权限</span></span><br><span class="line">        List&lt;String&gt; elPermissions = SecurityUtils.getCurrentUser().getAuthorities().stream().map(GrantedAuthority::getAuthority).collect(Collectors.toList());</span><br><span class="line">        <span class="comment">// 判断当前用户的所有权限是否包含接口上定义的权限</span></span><br><span class="line">        <span class="comment">// Stream.anyMatch(Predicate&lt;? super T&gt; predicate)这个方法是用来判断权限里面是否含有所需要的权限的 也就是anyMatch()里面的条件有一个成立即可</span></span><br><span class="line">        <span class="keyword">return</span> elPermissions.contains(<span class="string">&quot;admin&quot;</span>) || Arrays.stream(permissions).anyMatch(elPermissions::contains);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://example.com/2021/02/03/springSecurity-3-%E6%9D%83%E9%99%90%E9%AA%8C%E8%AF%81/" data-id="ckkp4zyme0001w8u85ph18pz6" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2021/02/03/springSecurity-2-%E9%85%8D%E7%BD%AE/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">springSecurity-2.配置</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/02/">February 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2021/01/">January 2021</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/12/">December 2020</a></li><li class="archive-list-item"><a class="archive-list-link" href="/archives/2020/11/">November 2020</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2021/02/03/springSecurity-3-%E6%9D%83%E9%99%90%E9%AA%8C%E8%AF%81/">springSecurity-3.权限验证</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/03/springSecurity-2-%E9%85%8D%E7%BD%AE/">springSecurity-2.配置</a>
+          </li>
+        
+          <li>
+            <a href="/2021/02/03/springSecurity-1-%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6/">springSecurity-1.认证机制</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/21/%E6%9F%A5%E6%89%BE1%EF%BC%9A%E9%A1%BA%E5%BA%8F%E6%9F%A5%E6%89%BE%E3%80%81%E6%8A%98%E5%8D%8A%E6%9F%A5%E6%89%BE%E3%80%81%E6%96%90%E6%B3%A2%E6%8B%89%E5%A5%91%E6%9F%A5%E6%89%BE/">查找1：顺序查找、折半查找、斐波拉契查找</a>
+          </li>
+        
+          <li>
+            <a href="/2021/01/20/%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95/">排序算法</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2021 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+  
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+
+
+<script src="/js/script.js"></script>
+
+
+
+
+  </div>
+</body>
+</html>
